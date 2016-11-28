@@ -1,6 +1,7 @@
 package cs514.iastate.edu.beaconminder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.imageView1.setImageResource(item.getIconID());
         holder.imageView2.setImageResource(item.getIndicatorID());
         holder.textView.setText(item.getTitle());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, BeaconDetail.class);
+                intent.putExtra(MainActivity.EXTRA_BEACON_ID, item.getBeaconID());
+                intent.putExtra(MainActivity.EXTRA_BINDING, item.getBinding());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

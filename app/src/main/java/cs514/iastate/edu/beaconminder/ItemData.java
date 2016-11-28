@@ -6,10 +6,31 @@ package cs514.iastate.edu.beaconminder;
 
 public class ItemData {
     private String title;
+    private String beaconID;
+    private String binding;
     private int iconID;
     private int indicatorID;
 
-    public ItemData(String title, int iconID, int indicatorID) {
+    public String getBeaconID() {
+        return beaconID;
+    }
+
+    public void setBeaconID(String beaconID) {
+        this.beaconID = beaconID;
+    }
+
+    public String getBinding() {
+        return binding;
+    }
+
+    public void setBinding(String binding) {
+        this.binding = binding;
+    }
+
+    public ItemData(String title, String beaconID, String binding, int iconID, int indicatorID) {
+        this.beaconID = beaconID;
+        this.binding = binding;
+
         this.title = title;
         this.iconID = iconID;
         this.indicatorID = indicatorID;
