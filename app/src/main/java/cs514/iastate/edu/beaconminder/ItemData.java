@@ -46,4 +46,23 @@ public class ItemData implements Serializable{
         return indicatorID;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBeaconID(String beaconID) {
+        this.beaconID = beaconID;
+    }
+
+    public void setBinding(String binding) {
+        this.binding = binding;
+    }
+
+    public void setIconID(int iconID) {
+        this.iconID = iconID;
+    }
+
+    public void setIndicatorID(int indicatorID) {
+        this.indicatorID = indicatorID;
+    }
 }
