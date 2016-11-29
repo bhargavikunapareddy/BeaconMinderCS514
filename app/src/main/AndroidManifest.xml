@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BeaconDetail"></activity>
+        <activity android:name=".BeaconDetail" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>
