@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_BINDING = "edu.iastate.com514.BINDING";
     public final static int DETAIL_REQUEST_CODE = 1;
     public final static int SETTING_REQUEST_CODE = 2;
-    private ArrayList<ItemData> sourceItem;
+    public static ArrayList<ItemData> sourceItem;
+    public static Map<String, ItemData> beaconMap;
     private RecyclerView mRecyclerView;
     private MyRecyclerViewAdapter adapter;
     private TextView logText;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ItemData item3 = new ItemData("glasses", "cccccccccc", "Glasses", R.drawable.glasses, R.drawable.offline);
 //        ItemData item4 = new ItemData("meds", "dddddddddd", "Meds",R.drawable.meds, R.drawable.offline);
         final ItemData item4 = new ItemData("meds", "dddddddddd", "Meds",R.drawable.meds, R.drawable.offline);
-        final Map<String,ItemData> beaconMap = new HashMap< >();
+        beaconMap = new HashMap< >();
         beaconMap.put("X3VP-G6UR1", item1);
 //        ItemData item5 = new ItemData("meds", R.drawable.meds, R.drawable.offline);
 //        ItemData item6 = new ItemData("meds", R.drawable.meds, R.drawable.offline);
