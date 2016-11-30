@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_BINDING = "edu.iastate.com514.BINDING";
     public final static int DETAIL_REQUEST_CODE = 1;
     public final static int SETTING_REQUEST_CODE = 2;
+    public final static int ADD_REQUEST_CODE = 3;
     public static ArrayList<ItemData> sourceItem;
     public static Map<String, ItemData> beaconMap;
     private RecyclerView mRecyclerView;
     private MyRecyclerViewAdapter adapter;
-    private TextView logText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mRecyclerView.setAdapter(adapter);
-        logText = (TextView)findViewById(R.id.textView);
-        logText.setText("Place Holder");
         InitializeBeacon.intializeGimbal(this.getApplication());
-        InitializeBeacon.initializeBeaconMapping(beaconMap, mRecyclerView, adapter, logText);
+        InitializeBeacon.initializeBeaconMapping(beaconMap, mRecyclerView, adapter);
 
         Button settingBtn = (Button) findViewById(R.id.settings);
         settingBtn.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 intent.putExtra("sourceItem", sourceItem);
                 startActivityForResult(intent, SETTING_REQUEST_CODE);
+            }
+        });
+
+        Button addBtn = (Button) findViewById(R.id.add_beacon);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddBeaconActivity.class);
+                startActivityForResult(intent, ADD_REQUEST_CODE);
             }
         });
     }
@@ -98,6 +105,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
+            }
+            if (requestCode == ADD_REQUEST_CODE) {
+                ItemData item = (ItemData) data.getSerializableExtra("newly_added_beacon");
+                sourceItem.add(item);
+                adapter.notifyDataSetChanged();
             }
         }
     }

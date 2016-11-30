@@ -22,16 +22,14 @@
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:text="Setting"/>
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/add_beacon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/recycler_view" />
+        android:layout_alignParentBottom="true"
+        android:text="Add beacon"/>
 </RelativeLayout>

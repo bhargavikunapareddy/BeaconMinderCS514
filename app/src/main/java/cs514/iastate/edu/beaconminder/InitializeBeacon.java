@@ -38,13 +38,13 @@ public class InitializeBeacon {
     }
 
     public static void initializeBeaconMapping(final Map<String,ItemData> beaconMapping, final RecyclerView view,
-                                               final MyRecyclerViewAdapter adapter, final TextView logText){
+                                               final MyRecyclerViewAdapter adapter){
         BeaconEventListener eventListener = new BeaconEventListener() {
             @Override
             public void onBeaconSighting(BeaconSighting beaconSighting) {
                 Beacon beacon = beaconSighting.getBeacon();
                 int rssi = beaconSighting.getRSSI();
-                logText.setText(rssi+"");
+//                logText.setText(rssi+"");
                 int indicator = R.drawable.online;
                 if(rssi > -30 || rssi < -50){
                     indicator = R.drawable.offline;
