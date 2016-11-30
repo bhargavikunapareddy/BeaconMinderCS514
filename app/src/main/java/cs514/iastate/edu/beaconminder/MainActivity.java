@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_CANCELED && data != null) {
-            if (requestCode == DETAIL_REQUEST_CODE) {
+            if (resultCode == DETAIL_REQUEST_CODE) {
                 String s = data.getStringExtra("BEACON_ID");
                 for (int i = 0; i < sourceItem.size(); i++) {
                     if (sourceItem.get(i).getBeaconID().equals(s)) {
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            if (requestCode == SETTING_REQUEST_CODE) {
+            if (resultCode == SETTING_REQUEST_CODE) {
                 String s = data.getStringExtra("BEACON_ID_FROM_SETTING");
                 for (int i = 0; i < sourceItem.size(); i++) {
                     if (sourceItem.get(i).getBeaconID().equals(s)) {
@@ -106,10 +105,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            if (requestCode == ADD_REQUEST_CODE) {
+            if (resultCode == ADD_REQUEST_CODE) {
                 ItemData item = (ItemData) data.getSerializableExtra("newly_added_beacon");
                 sourceItem.add(item);
                 adapter.notifyDataSetChanged();
+            }
+            if (resultCode == 4) {
+                String s = data.getStringExtra("BEACON_ID_FROM_SETTING");
+                boolean b = data.getBooleanExtra("beacon_switch", false);
+                for (int i = 0; i < sourceItem.size(); i++) {
+                    if (sourceItem.get(i).getBeaconID().equals(s)) {
+                        if (b) {
+                            sourceItem.get(i).setIndicatorID(R.drawable.online);
+                        }else sourceItem.get(i).setIndicatorID(R.drawable.offline);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
         }
     }

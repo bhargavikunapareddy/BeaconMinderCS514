@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class SettingActivity extends AppCompatActivity {
     private TextView textView;
     private Button deleteBtn;
     private ArrayList<String> sourceItem;
+    private Switch mSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class SettingActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         textView = (TextView) findViewById(R.id.beacons_id_value);
         deleteBtn = (Button) findViewById(R.id.delete_beacon);
+        mSwitch = (Switch) findViewById(R.id.switch1);
+        mSwitch.setChecked(list.get(0).getIndicatorID() == R.drawable.online);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sourceItem);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -41,6 +46,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 ItemData item = list.get(i);
                 textView.setText(item.getBeaconID());
+                mSwitch.setChecked(item.getIndicatorID() == R.drawable.online);
             }
 
             @Override
@@ -72,6 +78,16 @@ public class SettingActivity extends AppCompatActivity {
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Intent intent = new Intent();
+                intent.putExtra("BEACON_ID_FROM_SETTING", textView.getText());
+                intent.putExtra("beacon_switch", b);
+                setResult(4, intent);
             }
         });
     }
